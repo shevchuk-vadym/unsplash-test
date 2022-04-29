@@ -1,0 +1,84 @@
+.image {
+    height: auto;
+    position: relative;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+}
+
+.block {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.image:hover .block {
+    display: flex;
+}
+
+.favorite {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.like {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.add {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.info {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.author {
+    width: 30%;
+    height: 40px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    & > h4 {
+        cursor: pointer;
+    }
+}
+.download {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
