@@ -5,20 +5,19 @@ import { getValue } from '@testing-library/user-event/dist/utils';
 
 const ACCES_KEY = process.env.REACT_APP_ACCES_KEY;
 
-const Content = () => {
-  // const search = document.getElementById('unsplash').value;
+export const Content = () => {
   const [images, setImages] = useState([]);
   const [inputValue, setInputValue] = useState();
+
   const searchPhoto = async () => {
-    const response = await axios.get(
+    const responce = await fetch(
       'https://api.unsplash.com/search/photos?client_id=' +
         ACCES_KEY +
         '&query=' +
         inputValue
     );
-    const data = await response.data;
-    setImages(data.results);
-    console.log(images);
+    const res = await responce.json();
+    setImages(res.results);
   };
 
   const fetchAPI = async () => {
@@ -27,7 +26,6 @@ const Content = () => {
     );
     const data = await response.data;
     setImages(data);
-    console.log(images);
   };
   useEffect(() => {
     fetchAPI();
@@ -42,10 +40,8 @@ const Content = () => {
         placeholder='search photo'
         id='unsplash'
       />
-      <button onClick={searchPhoto}> CLICK ME!</button>
+      <button onClick={searchPhoto}> SEARCH</button>
       <Images images={images} />
     </div>
   );
 };
-
-export default Content;
