@@ -8,9 +8,11 @@ const Images = ({ images }) => {
       {images.map((image) => (
         <IndividualPhoto
           key={image.id}
+          id={image.id}
           image={image.urls.small}
           height={image.height}
           author={image.user.name}
+          liked_by_user={image.liked_by_user}
         />
       ))}
     </div>
