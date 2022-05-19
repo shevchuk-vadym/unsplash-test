@@ -26,7 +26,7 @@ const OAuth = ({ setToken, TOKEN_STORAGE_KEY }) => {
     const data = await response.data;
     console.log(data);
     setToken(data);
-    await setToLocalStorage(TOKEN_STORAGE_KEY, data.access_token);
+    setToLocalStorage(TOKEN_STORAGE_KEY, JSON.stringify(data));
   };
 
   console.log(code);

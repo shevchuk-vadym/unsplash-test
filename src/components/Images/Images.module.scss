@@ -1,6 +1,11 @@
-.grid {
-    border: 1px black solid;
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(3, 1fr);
+.root {
+    width: 100%;
+}
+.content {
+    width: 100%;
+    display: flex;
+}
+
+.gridItem {
+    padding: 10px;
 }

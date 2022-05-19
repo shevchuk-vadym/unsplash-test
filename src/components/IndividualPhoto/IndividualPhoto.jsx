@@ -1,12 +1,15 @@
 import React from 'react';
 import s from './individualPhoto.module.scss';
+import addPhoto from '../assets/plus-svgrepo-com.svg';
+import likePhotoSVG from '../assets/like-svgrepo-com.svg';
+import downloadPhoto from '../assets/download-svgrepo-com.svg';
 
 const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
   const divStyle = {
     height: height / 10,
   };
   const [like, settoLike] = React.useState();
-  let t = null
+  let t = null;
   function likePhoto() {
     const fetchAPILikes = async () => {
       const response = await fetch(
@@ -20,7 +23,7 @@ const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
       );
       const data = await response.json();
       console.log(data);
-      t = data
+      t = data;
       // settoLike(data);
     };
     // console.log(like);
@@ -32,15 +35,19 @@ const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
       <div className={s.block}>
         <div className={s.favorite}>
           <div className={s.like} onClick={likePhoto}>
-            {liked_by_user ? 'liked!!!' : 'like'}
+            <img src={likePhotoSVG} alt='' />
           </div>
-          <div className={s.add}>add</div>
+          <div className={s.add}>
+            <img src={addPhoto} alt='' />
+          </div>
         </div>
         <div className={s.info}>
           <div className={s.author}>
             <h4>{author}</h4>
           </div>
-          <div className={s.download}>down</div>
+          <div className={s.download}>
+            <img src={downloadPhoto} alt='' />
+          </div>
         </div>
       </div>
     </div>
