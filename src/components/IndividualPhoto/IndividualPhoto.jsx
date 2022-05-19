@@ -4,7 +4,14 @@ import addPhoto from '../assets/plus-svgrepo-com.svg';
 import likePhotoSVG from '../assets/like-svgrepo-com.svg';
 import downloadPhoto from '../assets/download-svgrepo-com.svg';
 
-const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
+const IndividualPhoto = ({
+  id,
+  image,
+  height,
+  author,
+  liked_by_user,
+  authorPhoto,
+}) => {
   const divStyle = {
     height: height / 10,
   };
@@ -29,6 +36,7 @@ const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
     // console.log(like);
     fetchAPILikes();
   }
+  console.log(author);
   return (
     <div className={s.image} style={divStyle}>
       <img className={s.img} src={image} alt='photo' />
@@ -43,6 +51,9 @@ const IndividualPhoto = ({ id, image, height, author, liked_by_user }) => {
         </div>
         <div className={s.info}>
           <div className={s.author}>
+            <div className={s.author_image}>
+              <img src={authorPhoto} alt='' />
+            </div>
             <h4>{author}</h4>
           </div>
           <div className={s.download}>

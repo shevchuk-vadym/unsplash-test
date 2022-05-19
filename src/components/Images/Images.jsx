@@ -19,6 +19,7 @@ const Content = ({ cols }) => {
                 image={image.urls.small}
                 height={image.height}
                 author={image.user.name}
+                authorPhoto={image.user.profile_image.small}
                 liked_by_user={image.liked_by_user}
               />
             </div>
@@ -47,7 +48,7 @@ const createDataModel = (images, cols) => {
 };
 
 const Images = ({ images }) => {
-  console.log(images);
+  console.log(images, '>>>>>>>>>>>>>>>>>>>>>');
   const cols = createDataModel(images, 3);
   console.log(cols);
   return (
