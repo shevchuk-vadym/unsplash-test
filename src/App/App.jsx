@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import './App.css';
-import { Content } from '../components/content';
+import { Content } from '../components/Content';
 import { LogIn } from '../components/LogIn';
 import { OAuth } from '../components/OAuth';
 import { OAuthContext } from '../contexts/OAuthContext';

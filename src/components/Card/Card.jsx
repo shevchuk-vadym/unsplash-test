@@ -1,20 +1,11 @@
 import React from 'react';
-import s from './individualPhoto.module.scss';
+import s from './Card.module.scss';
 import addPhoto from '../assets/plus-svgrepo-com.svg';
 import likePhotoSVG from '../assets/like-svgrepo-com.svg';
 import downloadPhoto from '../assets/download-svgrepo-com.svg';
+import { Link } from 'react-router-dom';
 
-const IndividualPhoto = ({
-  id,
-  image,
-  height,
-  author,
-  liked_by_user,
-  authorPhoto,
-}) => {
-  const divStyle = {
-    height: height / 10,
-  };
+const Card = ({ id, image, author, authorPhoto }) => {
   const [like, settoLike] = React.useState();
   let t = null;
   function likePhoto() {
@@ -38,8 +29,9 @@ const IndividualPhoto = ({
   }
   console.log(author);
   return (
-    <div className={s.image} style={divStyle}>
+    <div className={s.image}>
       <img className={s.img} src={image} alt='photo' />
+      <Link to='/' className={s.link}></Link>
       <div className={s.block}>
         <div className={s.favorite}>
           <div className={s.like} onClick={likePhoto}>
@@ -50,12 +42,12 @@ const IndividualPhoto = ({
           </div>
         </div>
         <div className={s.info}>
-          <div className={s.author}>
+          <Link className={s.author} to='/user'>
             <div className={s.author_image}>
               <img src={authorPhoto} alt='' />
             </div>
             <h4>{author}</h4>
-          </div>
+          </Link>
           <div className={s.download}>
             <img src={downloadPhoto} alt='' />
           </div>
@@ -65,4 +57,4 @@ const IndividualPhoto = ({
   );
 };
 
-export { IndividualPhoto };
+export { Card };

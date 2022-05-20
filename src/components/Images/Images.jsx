@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Images.module.scss';
-import { IndividualPhoto } from '../IndividualPhoto';
+import { Card } from '../Card';
 
 const Content = ({ cols }) => {
   return (
@@ -13,7 +13,7 @@ const Content = ({ cols }) => {
         >
           {column.map((image) => (
             <div id={image.id} key={image.id} className={s.gridItem}>
-              <IndividualPhoto
+              <Card
                 key={image.id}
                 id={image.id}
                 image={image.urls.small}
