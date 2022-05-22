@@ -6,18 +6,19 @@ import { LogIn } from '../components/LogIn';
 import { OAuth } from '../components/OAuth';
 import { OAuthContext } from '../contexts/OAuthContext';
 import { getFromLocalStorage } from '../components/utils/storages';
+import { Header } from '../components/Header';
+import { ModalProvider } from '../contexts/ModalContext';
 
 export const App = () => {
   const [token, setToken] = React.useState(undefined);
-  // console.log(token.access_token, token.token_type);
   const TOKEN_STORAGE_KEY = 'TOKEN';
 
   const renderLinks = () => {
     return (
       <div>
-        {!token ? <Link to='/'>LOGIN IN</Link> : ''}
+        {!token ? <Link to='/'>LOGIN IN</Link> : 'hello User'}
         {/* <Link to='/content'>CONTENT</Link> */}
-        {token ? 'hello User' : 'please log in'}
+        {/* {token ? 'hello User' : 'log in'} */}
       </div>
     );
   };
@@ -34,7 +35,8 @@ export const App = () => {
       value={{ token, setToken, TOKEN_STORAGE_KEY, renderLinks }}
     >
       <div>
-        {token ? <Link to='/content'>CONTENT</Link> : ''}
+        {/* <Header links={renderLinks} />
+          {token ? <Link to='/content'>CONTENT</Link> : ''} */}
         <Routes>
           <Route
             path='/content'

@@ -1,0 +1,60 @@
+@keyframes showBackdrop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes showModal {
+    0% {
+        opacity: 0;
+        transform: translateY(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.backdrop {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(8, 8, 8, 0.7);
+    transition: all 0.3s;
+    animation: showBackdrop 0.3s ease-out;
+    &_hide {
+        opacity: 0;
+    }
+}
+.backdrop_hide .modal {
+    transform: translateY(-500px);
+}
+.modal {
+    background: #fff;
+    width: 1100px;
+    height: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.244);
+    border-radius: 15px;
+    animation: showModal 0.3s ease-out;
+    transition: all 0.3s;
+
+    &_header {
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(171, 161, 161, 0.506);
+    }
+    &_body {
+        padding: 10px 20px;
+        & > img {
+            width: 100%;
+        }
+    }
+}

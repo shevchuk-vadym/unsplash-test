@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import s from './Card.module.scss';
 import addPhoto from '../assets/plus-svgrepo-com.svg';
 import likePhotoSVG from '../assets/like-svgrepo-com.svg';
 import downloadPhoto from '../assets/download-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
+import { ModalContext } from '../../contexts/ModalContext';
 
 const Card = ({ id, image, author, authorPhoto }) => {
+  const { openModal } = useContext(ModalContext);
   const [like, settoLike] = React.useState();
   let t = null;
   function likePhoto() {
@@ -27,11 +29,16 @@ const Card = ({ id, image, author, authorPhoto }) => {
     // console.log(like);
     fetchAPILikes();
   }
-  console.log(author);
+  const handleClickonOnPhoto = () => {
+    openModal({
+      title: 'Opened',
+      content: image,
+    });
+  };
   return (
     <div className={s.image}>
       <img className={s.img} src={image} alt='photo' />
-      <Link to='/' className={s.link}></Link>
+      <div className={s.link} onClick={handleClickonOnPhoto}></div>
       <div className={s.block}>
         <div className={s.favorite}>
           <div className={s.like} onClick={likePhoto}>

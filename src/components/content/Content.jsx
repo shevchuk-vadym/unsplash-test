@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Images } from '../Images';
 import { OAuthContext } from '../../contexts/OAuthContext';
+import { ContentContext } from '../../contexts/ContentContext';
 import { getFromLocalStorage } from '../utils/storages';
 import { Header } from '../Header';
 import s from './Content.module.scss';
+import { ModalContext, ModalProvider } from '../../contexts/ModalContext';
+import { ModalWindow } from '../ModalWindow/ModalWIndow';
 
 const ACCES_KEY = process.env.REACT_APP_ACCES_KEY;
 
 const Content = ({ token, tokenKey, links }) => {
+  const { openModal, closeModal } = useContext(ModalContext);
   const [count, setCount] = useState(1);
   const [images, setImages] = useState([]);
   const [inputValue, setInputValue] = useState();
@@ -53,16 +57,19 @@ const Content = ({ token, tokenKey, links }) => {
   }
 
   return (
-    <div className={s.root}>
-      <Header
-        searchPhoto={searchPhoto}
-        setInputValue={setInputValue}
-        inputValue={inputValue}
-        links={links}
-      />
-      <Images images={images} onLike={(photoId) => {}} />
-      <button onClick={morePhoto}>MORE PHOTO</button>
-    </div>
+    <ModalProvider>
+      <div className={s.root}>
+        <Header
+          searchPhoto={searchPhoto}
+          setInputValue={setInputValue}
+          inputValue={inputValue}
+          links={links}
+        />
+        {/* <ModalWindow /> */}
+        <Images images={images} onLike={(photoId) => {}} />
+        <button onClick={morePhoto}>MORE PHOTO</button>
+      </div>
+    </ModalProvider>
   );
 };
 

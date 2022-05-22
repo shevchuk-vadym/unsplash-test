@@ -48,9 +48,7 @@ const createDataModel = (images, cols) => {
 };
 
 const Images = ({ images }) => {
-  console.log(images, '>>>>>>>>>>>>>>>>>>>>>');
   const cols = createDataModel(images, 3);
-  console.log(cols);
   return (
     <div className={s.root}>
       <Content {...{ cols }} />
