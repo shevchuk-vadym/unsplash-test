@@ -6,7 +6,7 @@ import downloadPhoto from '../assets/download-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 import { ModalContext } from '../../contexts/ModalContext';
 
-const Card = ({ id, image, author, authorPhoto }) => {
+const Card = ({ id, image, author, authorPhoto, imageMedium }) => {
   const { openModal } = useContext(ModalContext);
   const [like, settoLike] = React.useState();
   let t = null;
@@ -31,8 +31,9 @@ const Card = ({ id, image, author, authorPhoto }) => {
   }
   const handleClickonOnPhoto = () => {
     openModal({
-      title: 'Opened',
-      content: image,
+      author: author,
+      authorImg: authorPhoto,
+      content: imageMedium,
     });
   };
   return (

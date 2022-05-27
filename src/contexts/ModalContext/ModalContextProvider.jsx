@@ -11,13 +11,13 @@ export const ModalProvider = ({ children }) => {
     setModalContent(modalConnfig);
     setModalOpened(true);
   };
-  const clodeModal = () => {
+  const closeModal = () => {
     setModalOpened(false);
   };
 
   const valueModalProvider = {
     openModal,
-    clodeModal,
+    closeModal,
   };
   return (
     <ModalContext.Provider value={valueModalProvider}>

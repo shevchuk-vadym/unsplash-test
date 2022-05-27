@@ -17,6 +17,7 @@ const Content = ({ cols }) => {
                 key={image.id}
                 id={image.id}
                 image={image.urls.small}
+                imageMedium={image.urls.regular}
                 height={image.height}
                 author={image.user.name}
                 authorPhoto={image.user.profile_image.small}

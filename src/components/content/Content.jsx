@@ -12,17 +12,18 @@ const ACCES_KEY = process.env.REACT_APP_ACCES_KEY;
 
 const Content = ({ token, tokenKey, links }) => {
   const { openModal, closeModal } = useContext(ModalContext);
-  const [count, setCount] = useState(1);
+  const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [inputValue, setInputValue] = useState();
+
+  const [query, setQuery] = useState('');
   const getToken = async () => {
     const token = getFromLocalStorage(tokenKey);
     return token;
   };
 
-  const searchPhoto = async () => {
+  const searchPhoto = async ({ page, per_page, query }) => {
     const responce = await fetch(
-      `https://api.unsplash.com/search/photos?page=${count}&client_id=${ACCES_KEY}&query=${inputValue}`,
+      `https://api.unsplash.com/search/photos?page=${page}&client_id=${ACCES_KEY}&query=${query}`,
       {
         headers: {
           Authorization: `Bearer ${token.access_key}`,
@@ -30,41 +31,56 @@ const Content = ({ token, tokenKey, links }) => {
       }
     );
     const res = await responce.json();
-    setImages(res.results);
+    console.log([...images, ...res.results]);
+    setImages([...images, ...res.results]);
   };
 
-  const fetchAPI = async () => {
+  // const getUrl = (isSearch, { page, per_page, query }) => {
+  //   if (isSearch) {
+  //     return `https://api.unsplash.com/search/photos?page=${page}&per_page=${per_page}&client_id=${ACCES_KEY}&query=${query}`;
+  //   } else {
+  //     return `https://api.unsplash.com/photos?page=${page}&per_page=${per_page}&client_id=${ACCES_KEY}`;
+  //   }
+  // };
+
+  const fetchAPI = async ({ page, per_page }) => {
     const headers = {};
     if (token) {
       headers.Authorization = `Bearer ${token.access_key}`;
     }
     const response = await fetch(
-      `https://api.unsplash.com/photos/?page=${count}&client_id=${ACCES_KEY}`,
+      `https://api.unsplash.com/photos?page=${page}&per_page=${per_page}&client_id=${ACCES_KEY}`,
       {
         method: 'GET',
         headers: headers,
       }
     );
     const data = await response.json();
-    setImages(data);
+    console.log([...images, ...data]);
+    setImages([...images, ...data]);
   };
   useEffect(() => {
-    fetchAPI();
-  }, []);
+    if (query) {
+      searchPhoto({ page, per_page: 12, query });
+    } else {
+      fetchAPI({ page, per_page: 12, query });
+    }
+  }, [page, query]);
+
   function morePhoto() {
-    setCount(count + 1);
-    fetchAPI();
+    console.log(page);
+    setPage(page + 1);
   }
+
+  const search = (value) => {
+    setImages([]);
+    setQuery(value);
+  };
 
   return (
     <ModalProvider>
       <div className={s.root}>
-        <Header
-          searchPhoto={searchPhoto}
-          setInputValue={setInputValue}
-          inputValue={inputValue}
-          links={links}
-        />
+        <Header onSearch={search} links={links} />
         {/* <ModalWindow /> */}
         <Images images={images} onLike={(photoId) => {}} />
         <button onClick={morePhoto}>MORE PHOTO</button>

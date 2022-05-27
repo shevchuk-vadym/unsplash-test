@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 import searchSVG from '../assets/search-svgrepo-com.svg';
 
 import s from './Header.module.scss';
-const Header = ({ searchPhoto, inputValue, setInputValue, links }) => {
+const Header = ({ links, onSearch }) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const onChange = useCallback((e) => setInputValue(e.target.value), []);
+  const onSubmit = useCallback((e) => {
+    e.preventDefault();
+    onSearch(inputValue);
+  });
   return (
     <div className={s.header}>
       <div className={s.header_logo}>
@@ -12,17 +19,19 @@ const Header = ({ searchPhoto, inputValue, setInputValue, links }) => {
           alt='logo'
         />
       </div>
-      <input
-        className={s.header_input}
-        type='search'
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        placeholder='search photo'
-        id='unsplash'
-      />
-      <button className={s.header_button} onClick={searchPhoto}>
-        <img src={searchSVG} alt='' />
-      </button>
+      <form action='' onSubmit={onSubmit} className={s.header_searchForm}>
+        <input
+          className={s.header_input}
+          type='search'
+          value={inputValue}
+          onChange={onChange}
+          placeholder='search photo'
+          id='unsplash'
+        />
+        <button className={s.header_button}>
+          <img src={searchSVG} alt='' />
+        </button>
+      </form>
       <div className={s.header_user}>
         <div className={s.header_userInfo}>
           {links()} <div className={s.header_userInfo__logo}></div>
