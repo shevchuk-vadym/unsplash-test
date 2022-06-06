@@ -22,6 +22,7 @@ const Content = ({ cols }) => {
                 author={image.user.name}
                 authorPhoto={image.user.profile_image.small}
                 liked_by_user={image.liked_by_user}
+                user={image.user}
               />
             </div>
           ))}
@@ -49,7 +50,7 @@ const createDataModel = (images, cols) => {
 };
 
 const Images = ({ images }) => {
-  const cols = createDataModel(images, 3);
+  const cols = createDataModel(images, window.screen.availWidth <= 769 ? 1 : 3);
   return (
     <div className={s.root}>
       <Content {...{ cols }} />

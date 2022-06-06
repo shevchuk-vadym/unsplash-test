@@ -10,11 +10,11 @@ import { ModalWindow } from '../ModalWindow/ModalWIndow';
 
 const ACCES_KEY = process.env.REACT_APP_ACCES_KEY;
 
-const Content = ({ token, tokenKey, links }) => {
+const Content = ({ token, tokenKey, links, user }) => {
   const { openModal, closeModal } = useContext(ModalContext);
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-
+  console.log(user);
   const [query, setQuery] = useState('');
   const getToken = async () => {
     const token = getFromLocalStorage(tokenKey);
@@ -26,7 +26,7 @@ const Content = ({ token, tokenKey, links }) => {
       `https://api.unsplash.com/search/photos?page=${page}&client_id=${ACCES_KEY}&query=${query}`,
       {
         headers: {
-          Authorization: `Bearer ${token.access_key}`,
+          Authorization: `Bearer ${token.access_token}`,
         },
       }
     );
@@ -45,9 +45,11 @@ const Content = ({ token, tokenKey, links }) => {
 
   const fetchAPI = async ({ page, per_page }) => {
     const headers = {};
+    console.log('====', token);
     if (token) {
-      headers.Authorization = `Bearer ${token.access_key}`;
+      headers.Authorization = `Bearer ${token.access_token}`;
     }
+    console.log(headers);
     const response = await fetch(
       `https://api.unsplash.com/photos?page=${page}&per_page=${per_page}&client_id=${ACCES_KEY}`,
       {
@@ -65,7 +67,7 @@ const Content = ({ token, tokenKey, links }) => {
     } else {
       fetchAPI({ page, per_page: 12, query });
     }
-  }, [page, query]);
+  }, [page, query, token]);
 
   function morePhoto() {
     console.log(page);
@@ -80,7 +82,7 @@ const Content = ({ token, tokenKey, links }) => {
   return (
     <ModalProvider>
       <div className={s.root}>
-        <Header onSearch={search} links={links} />
+        <Header onSearch={search} links={links} user={user} />
         {/* <ModalWindow /> */}
         <Images images={images} onLike={(photoId) => {}} />
         <button onClick={morePhoto}>MORE PHOTO</button>
@@ -97,6 +99,7 @@ const WithToken = () => {
           token={value.token}
           tokenKey={value.TOKEN_STORAGE_KEY}
           links={value.renderLinks}
+          user={value.user}
         />
       )}
     </OAuthContext.Consumer>

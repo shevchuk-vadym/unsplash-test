@@ -6,7 +6,7 @@ import downloadPhoto from '../assets/download-svgrepo-com.svg';
 import { Link } from 'react-router-dom';
 import { ModalContext } from '../../contexts/ModalContext';
 
-const Card = ({ id, image, author, authorPhoto, imageMedium }) => {
+const Card = ({ id, image, author, authorPhoto, imageMedium, user }) => {
   const { openModal } = useContext(ModalContext);
   const [like, settoLike] = React.useState();
   let t = null;
@@ -50,7 +50,7 @@ const Card = ({ id, image, author, authorPhoto, imageMedium }) => {
           </div>
         </div>
         <div className={s.info}>
-          <Link className={s.author} to='/user'>
+          <Link className={s.author} to={`/user/${user.username}`}>
             <div className={s.author_image}>
               <img src={authorPhoto} alt='' />
             </div>
