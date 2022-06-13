@@ -24,6 +24,36 @@
         width: 70%;
         padding: 10px 20px;
     }
+    &_header {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 20px;
+        min-height: 50px;
+        align-items: center;
+        border-bottom: 1px solid #c4c3c3;
+        & > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 10%;
+            margin-left: 10px;
+            font-size: 18px;
+            color: #767676;
+            cursor: pointer;
+            min-height: 49px;
+            &:hover {
+                border-bottom: 1px solid black;
+                color: black;
+            }
+            & > svg {
+                margin-right: 10px;
+            }
+        }
+    }
+    &_main {
+        width: 100%;
+        background-color: yellow;
+    }
 }
 
 @media (max-width: 769px) {

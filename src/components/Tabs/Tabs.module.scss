@@ -1,0 +1,21 @@
+.root {
+  
+}
+
+.header {
+  background: #efefef;
+  border-bottom: 1px solid red
+}
+
+.content {
+  min-height: 50vh
+}
+
+.contentItem {
+  display: none;
+  &.active {
+    display: inherit;
+  }
+}
+
+

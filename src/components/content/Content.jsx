@@ -78,7 +78,7 @@ const Content = ({ token, tokenKey, links, user }) => {
     setImages([]);
     setQuery(value);
   };
-
+  console.log('HHHHHHEEEEEELLLLOOOOO', images);
   return (
     <ModalProvider>
       <div className={s.root}>
